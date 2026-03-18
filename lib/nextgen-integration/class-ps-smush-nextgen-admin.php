@@ -156,13 +156,13 @@ if ( ! class_exists( 'WpSmushNextGenAdmin' ) ) {
 			$handle = 'ps-medienoptimierung-admin-js';
 
 			$ps_smush_msgs = array(
-				'resmush'       => esc_html__( 'Super-Smush', 'ps-medienoptimierung' ),
-				'smush_now'     => esc_html__( 'Smush Now', 'ps-medienoptimierung' ),
-				"error_in_bulk" => esc_html__( '{{errors}} image(s) were skipped due to an error.', 'ps-medienoptimierung' ),
-				"all_resmushed" => esc_html__( 'All images are fully optimized.', 'ps-medienoptimierung' ),
-				'restore'       => esc_html__( "Restoring image..", "ps-medienoptimierung" ),
-				'smushing'      => esc_html__( "Smushing image..", "ps-medienoptimierung" ),
-				'checking'      => esc_html__( "Checking images..", "ps-medienoptimierung" )
+				'resmush'       => esc_html__( 'Super-Optimierung', 'ps-medienoptimierung' ),
+				'smush_now'     => esc_html__( 'Jetzt optimieren', 'ps-medienoptimierung' ),
+				"error_in_bulk" => esc_html__( '{{errors}} Bild(er) wurden wegen eines Fehlers übersprungen.', 'ps-medienoptimierung' ),
+				"all_resmushed" => esc_html__( 'Alle Bilder sind vollständig optimiert.', 'ps-medienoptimierung' ),
+				'restore'       => esc_html__( "Bild wird wiederhergestellt..", "ps-medienoptimierung" ),
+				'smushing'      => esc_html__( "Bild wird optimiert..", "ps-medienoptimierung" ),
+				'checking'      => esc_html__( "Bilder werden geprüft..", "ps-medienoptimierung" )
 			);
 
 			wp_localize_script( $handle, 'ps_smush_msgs', $ps_smush_msgs );
@@ -260,13 +260,13 @@ if ( ! class_exists( 'WpSmushNextGenAdmin' ) ) {
 			global $WpSmush;
 
 			// the status
-			$status_txt = __( 'Not processed', 'ps-medienoptimierung' );
+			$status_txt = __( 'Noch nicht verarbeitet', 'ps-medienoptimierung' );
 
 			// we need to show the smush button
 			$show_button = true;
 
 			// the button text
-			$button_txt = __( 'Smush Now!', 'ps-medienoptimierung' );
+			$button_txt = __( 'Jetzt optimieren!', 'ps-medienoptimierung' );
 			if ( $text_only ) {
 				return $status_txt;
 			}
@@ -382,26 +382,26 @@ if ( ! class_exists( 'WpSmushNextGenAdmin' ) ) {
 
 			/** End Of Re-Smush Notice */
 
-			//If there are no images in Media Library
+			//If there are no images in Medienbibliothek
 			if ( 0 >= $this->total_count ) { ?>
 				<span class="ps-smush-no-image tc">
 					<img src="<?php echo PS_SMUSH_URL . 'assets/images/smush-no-media.png'; ?>"
 					     alt="<?php esc_html_e( "No attachments found - Upload some images", "ps-medienoptimierung" ); ?>">
 		        </span>
-				<p class="ps-smush-no-images-content tc roboto-regular"><?php printf( esc_html__( "We haven’t found any images in your %sgallery%s yet, so there’s no smushing to be done! Once you upload images, reload this page and start playing!", "ps-medienoptimierung" ), '<a href="' . esc_url( admin_url( 'admin.php?page=ngg_addgallery' ) ) . '">', '</a>' ); ?></p>
+				<p class="ps-smush-no-images-content tc roboto-regular"><?php printf( esc_html__( "In deiner %sGalerie%s wurden noch keine Bilder gefunden – es gibt nichts zu optimieren! Lade Bilder hoch, lade diese Seite neu und leg los!", "ps-medienoptimierung" ), '<a href="' . esc_url( admin_url( 'admin.php?page=ngg_addgallery' ) ) . '">', '</a>' ); ?></p>
 				<span class="ps-smush-upload-images tc">
 				<a class="button button-cta"
-				   href="<?php echo esc_url( admin_url( 'admin.php?page=ngg_addgallery' ) ); ?>"><?php esc_html_e( "UPLOAD IMAGES", "ps-medienoptimierung" ); ?></a>
+				   href="<?php echo esc_url( admin_url( 'admin.php?page=ngg_addgallery' ) ); ?>"><?php esc_html_e( "BILDER HOCHLADEN", "ps-medienoptimierung" ); ?></a>
 				</span><?php
 			} else { ?>
 				<!-- Hide All done div if there are images pending -->
 				<div class="ps-smush-notice ps-smush-all-done<?php echo $all_done ? '' : ' hidden' ?>">
-					<i class="icon-fi-check-tick"></i><?php esc_html_e( "All images are smushed and up to date. Awesome!", "ps-medienoptimierung" ); ?>
+					<i class="icon-fi-check-tick"></i><?php esc_html_e( "Alle Bilder sind optimiert und aktuell. Großartig!", "ps-medienoptimierung" ); ?>
 				</div>
 				<div class="ps-smush-bulk-wrapper <?php echo $all_done ? ' hidden' : ''; ?>"><?php
 				//If all the images in media library are smushed
 				//Button Text
-				$button_content = esc_html__( "BULK SMUSH", "ps-medienoptimierung" );
+				$button_content = esc_html__( "BULK-OPTIMIERUNG", "ps-medienoptimierung" );
 				// DO not show the remaining notice if we have resmush ids
 				?>
 				<div class="ps-smush-notice ps-smush-remaining  <?php echo count( $this->resmush_ids ) > 0 ? ' hidden' : ''; ?>">
@@ -422,7 +422,7 @@ if ( ! class_exists( 'WpSmushNextGenAdmin' ) ) {
 						),
 						$url
 					); ?>
-					<p class="ps-smush-enable-lossy"><?php printf( esc_html__( "Enable Super-smush in the %sSettings%s area to get even more savings with almost no visible drop in quality.", "ps-medienoptimierung" ), '<a href="' . $url .'" target="_blank">', "</a>"); ?></p><?php
+					<p class="ps-smush-enable-lossy"><?php printf( esc_html__( "Enable Super-Optimierung in the %sEinstellungen%s aktivieren, um noch mehr zu sparen – bei kaum sichtbarem Qualitätsverlust.", "ps-medienoptimierung" ), '<a href="' . $url .'" target="_blank">', "</a>"); ?></p><?php
 				} ?>
 				</div><?php
 				$wpsmush_bulkui->progress_bar( $this );
@@ -437,12 +437,12 @@ if ( ! class_exists( 'WpSmushNextGenAdmin' ) ) {
 			global $WpSmush, $wpsmush_bulkui;
 
 			//Subheading Content
-			$smush_individual_msg = sprintf( esc_html__( "Smush individual images via your %sManage Galleries%s section", "ps-medienoptimierung" ), '<a href="' . esc_url( admin_url() . 'admin.php?page=nggallery-manage-gallery' ) . '" title="' . esc_html__( 'Manage Galleries', 'ps-medienoptimierung' ) . '">', '</a>' );
+			$smush_individual_msg = sprintf( esc_html__( "Einzelne Bilder über deinen %sGalerie-Manager%s optimieren", "ps-medienoptimierung" ), '<a href="' . esc_url( admin_url() . 'admin.php?page=nggallery-manage-gallery' ) . '" title="' . esc_html__( 'Galerien verwalten', 'ps-medienoptimierung' ) . '">', '</a>' );
 
 			$class = $WpSmush->validate_install() ? 'bulk-smush-wrapper ps-smush-pro-install' : 'bulk-smush-wrapper';
 
 			//Container Header
-			$wpsmush_bulkui->container_header( $class, 'ps-smush-bulk-wrap-box', esc_html__( "BULK SMUSH", "ps-medienoptimierung" ), $smush_individual_msg ); ?>
+			$wpsmush_bulkui->container_header( $class, 'ps-smush-bulk-wrap-box', esc_html__( "BULK-OPTIMIERUNG", "ps-medienoptimierung" ), $smush_individual_msg ); ?>
 
 			<div class="box-container"><?php
 				$this->bulk_smush_content(); ?>
@@ -451,7 +451,7 @@ if ( ! class_exists( 'WpSmushNextGenAdmin' ) ) {
 		}
 
 		/**
-		 * Outputs the Smush stats for the site
+		 * Outputs the Optimierungs-Statistiken for the site
 		 */
 		function smush_stats_container() {
 			global $WpSmush, $wpsmushnextgenstats, $wpsmush_bulkui, $wpsmush_db;
@@ -459,8 +459,8 @@ if ( ! class_exists( 'WpSmushNextGenAdmin' ) ) {
 			//If we have resmush list, smushed_count = totalcount - resmush count, else smushed_count
 			$smushed_count = ( $resmush_count = count( $this->resmush_ids ) ) > 0 ? ( $this->total_count - ( $resmush_count + $this->remaining_count ) ) : $this->smushed_count;
 
-			$button = '<span class="spinner"></span><button tooltip="' . esc_html__( "Lets you check if any images can be further optimized. Useful after changing settings.", "ps-medienoptimierung" ) . '" data-type="nextgen" class="ps-smush-title button button-grey button-small ps-smush-scan">' . esc_html__( "RE-CHECK IMAGES", "ps-medienoptimierung" ) . '</button>';
-			$wpsmush_bulkui->container_header( 'smush-stats-wrapper', 'ps-smush-stats-box', esc_html__( "STATS", "ps-medienoptimierung" ), $button );?>
+			$button = '<span class="spinner"></span><button tooltip="' . esc_html__( "Prüft, ob Bilder noch weiter optimiert werden können. Nützlich nach Einstellungsänderungen.", "ps-medienoptimierung" ) . '" data-type="nextgen" class="ps-smush-title button button-grey button-small ps-smush-scan">' . esc_html__( "BILDER NEU PRÜFEN", "ps-medienoptimierung" ) . '</button>';
+			$wpsmush_bulkui->container_header( 'smush-stats-wrapper', 'ps-smush-stats-box', esc_html__( "STATISTIKEN", "ps-medienoptimierung" ), $button );?>
 
 			<div class="box-content">
 			<div class="row smush-total-savings smush-total-reduction-percent">
@@ -471,13 +471,13 @@ if ( ! class_exists( 'WpSmushNextGenAdmin' ) ) {
 						<div class="ps-smush-smush-stats-wrapper">
 							<span class="ps-smush-total-optimised"><?php echo $this->image_count; ?></span>
 						</div>
-						<span class="total-stats-label"><?php esc_html_e( "Images smushed", "ps-medienoptimierung" ); ?></span>
+						<span class="total-stats-label"><?php esc_html_e( "Optimierte Bilder", "ps-medienoptimierung" ); ?></span>
 					</div>
 				</div>
 			</div>
 			<hr />
 			<div class="row ps-smush-savings">
-				<span class="float-l ps-smush-stats-label"><?php esc_html_e("Total savings", "ps-medienoptimierung");?></span>
+				<span class="float-l ps-smush-stats-label"><?php esc_html_e("Gesamteinsparung", "ps-medienoptimierung");?></span>
 				<span class="float-r ps-smush-stats">
 				    <span class="ps-smush-stats-percent"><?php echo $this->stats['percent'] > 0 ? number_format_i18n( $this->stats['percent'], 1, '.', '' ) : 0; ?></span>%
 					<span class="ps-smush-stats-sep">/</span>
@@ -493,7 +493,7 @@ if ( ! class_exists( 'WpSmushNextGenAdmin' ) ) {
 				<hr>
 				<div class="row super-smush-attachments">
 					<span class="float-l ps-smush-stats-label">
-						<strong><?php esc_html_e( "Super-smushed images", "ps-medienoptimierung" ); ?></strong>
+						<strong><?php esc_html_e( "Super-optimierte Bilder", "ps-medienoptimierung" ); ?></strong>
 					</span>
 					<span class="float-r ps-smush-stats">
 						<?php

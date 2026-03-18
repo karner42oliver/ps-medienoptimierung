@@ -98,7 +98,7 @@ if ( ! class_exists( 'WpSmushResize' ) ) {
 
 			if ( ! empty( $file_path ) ) {
 
-				// Skip: if "noresize" is included in the filename, Thanks to Imsanity
+				// Überspringen: if "noresize" is included in the filename, Thanks to Imsanity
 				if ( strpos( $file_path, 'noresize' ) !== false ) {
 					return false;
 				}

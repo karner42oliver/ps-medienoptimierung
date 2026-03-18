@@ -73,9 +73,9 @@ if ( ! class_exists( 'WpSmushNextGen' ) ) {
 		 */
 		function register( $settings ) {
 			$settings['nextgen'] = array(
-				'label' => esc_html__( 'Enable NextGen Gallery integration', 'ps-medienoptimierung' ),
+				'label' => esc_html__( 'NextGen Gallery-Integration aktivieren', 'ps-medienoptimierung' ),
                 'short_label' => esc_html__( 'NextGen Gallery', 'ps-medienoptimierung' ),
-				'desc'  => esc_html__( 'Allow smushing images directly through NextGen Gallery settings.', 'ps-medienoptimierung' )
+				'desc'  => esc_html__( 'Bilder direkt über die NextGen Gallery-Einstellungen optimieren.', 'ps-medienoptimierung' )
 			);
 
 			return $settings;
@@ -223,7 +223,7 @@ if ( ! class_exists( 'WpSmushNextGen' ) ) {
 
 				foreach ( $sizes as $size ) {
 
-					//Skip Full size, if smush original is not checked
+					//Überspringen Full size, if smush original is not checked
 					if ( 'full' == $size && ! $WpSmush->smush_original ) {
 						continue;
 					}
@@ -339,7 +339,7 @@ if ( ! class_exists( 'WpSmushNextGen' ) ) {
 					 *
 					 * @param int $ID Image Id
 					 *
-					 * @param array $stats Smush Stats for the image
+					 * @param array $stats Optimierungs-Statistiken for the image
 					 *
 					 */
 					do_action( 'ps_smush_image_optimised_nextgen', $image->pid, $stats );
@@ -381,7 +381,7 @@ if ( ! class_exists( 'WpSmushNextGen' ) ) {
 			$metadata = ! empty( $image ) ? $image->meta_data : '';
 
 			if ( empty( $metadata ) ) {
-				wp_send_json_error( array( 'error_msg' => '<p class="ps-smush-error-message">' . esc_html__( "We couldn't find the metadata for the image, possibly the image has been deleted.", "ps-medienoptimierung" ) . '</p>' ) );
+				wp_send_json_error( array( 'error_msg' => '<p class="ps-smush-error-message">' . esc_html__( "Metadaten des Bildes konnten nicht gefunden werden – das Bild wurde möglicherweise gelöscht.", "ps-medienoptimierung" ) . '</p>' ) );
 			}
 
 			$registry = C_Component_Registry::get_instance();
@@ -440,11 +440,11 @@ if ( ! class_exists( 'WpSmushNextGen' ) ) {
 
 			//Check for media upload permission
 			if ( ! current_user_can( 'upload_files' ) ) {
-				wp_die( __( "You don't have permission to work with uploaded files.", 'ps-medienoptimierung' ) );
+				wp_die( __( "Du hast keine Berechtigung, hochgeladene Dateien zu bearbeiten.", 'ps-medienoptimierung' ) );
 			}
 
 			if ( empty( $pid ) ) {
-				wp_die( __( 'No attachment ID was provided.', 'ps-medienoptimierung' ) );
+				wp_die( __( 'Keine Anhang-ID angegeben.', 'ps-medienoptimierung' ) );
 			}
 
 			$this->smush_image( $pid, '' );
@@ -527,7 +527,7 @@ if ( ! class_exists( 'WpSmushNextGen' ) ) {
 			if ( empty( $_POST['attachment_id'] ) || empty( $_POST['_nonce'] ) ) {
 				wp_send_json_error( array(
 					'error'   => 'empty_fields',
-					'message' => esc_html__( "Error in processing restore action, Fields empty.", "ps-medienoptimierung" )
+					'message' => esc_html__( "Fehler beim Wiederherstellen – Felder leer.", "ps-medienoptimierung" )
 				) );
 			}
 
@@ -535,7 +535,7 @@ if ( ! class_exists( 'WpSmushNextGen' ) ) {
 			if ( ! wp_verify_nonce( $_POST['_nonce'], "ps-smush-restore-" . $_POST['attachment_id'] ) ) {
 				wp_send_json_error( array(
 					'error'   => 'empty_fields',
-					'message' => esc_html__( "Image not restored, Nonce verification failed.", "ps-medienoptimierung" )
+					'message' => esc_html__( "Bild nicht wiederhergestellt, Nonce-Verifizierung fehlgeschlagen.", "ps-medienoptimierung" )
 				) );
 			}
 
@@ -610,7 +610,7 @@ if ( ! class_exists( 'WpSmushNextGen' ) ) {
 
 				wp_send_json_success( array( 'button' => $button_html ) );
 			}
-			wp_send_json_error( array( 'message' => '<div class="ps-smush-error">' . __( "Unable to restore image", "ps-medienoptimierung" ) . '</div>' ) );
+			wp_send_json_error( array( 'message' => '<div class="ps-smush-error">' . __( "Bild konnte nicht wiederhergestellt werden", "ps-medienoptimierung" ) . '</div>' ) );
 		}
 
 		/**
@@ -621,14 +621,14 @@ if ( ! class_exists( 'WpSmushNextGen' ) ) {
 			if ( empty( $_POST['attachment_id'] ) || empty( $_POST['_nonce'] ) ) {
 				wp_send_json_error( array(
 					'error'   => 'empty_fields',
-					'message' => '<div class="ps-smush-error">' . esc_html__( "We couldn't process the image, fields empty.", "ps-medienoptimierung" ) . '</div>'
+					'message' => '<div class="ps-smush-error">' . esc_html__( "Bild konnte nicht verarbeitet werden – Felder leer.", "ps-medienoptimierung" ) . '</div>'
 				) );
 			}
 			//Check Nonce
 			if ( ! wp_verify_nonce( $_POST['_nonce'], "ps-smush-resmush-" . $_POST['attachment_id'] ) ) {
 				wp_send_json_error( array(
 					'error'   => 'empty_fields',
-					'message' => '<div class="ps-smush-error">' . esc_html__( "Image couldn't be smushed as the nonce verification failed, try reloading the page.", "ps-medienoptimierung" ) . '</div>'
+					'message' => '<div class="ps-smush-error">' . esc_html__( "Bild konnte nicht optimiert werden, Nonce-Verifizierung fehlgeschlagen. Bitte lade die Seite neu.", "ps-medienoptimierung" ) . '</div>'
 				) );
 			}
 
@@ -645,7 +645,7 @@ if ( ! class_exists( 'WpSmushNextGen' ) ) {
 			} elseif ( is_wp_error( $smushed ) ) {
 
 				//Send Error Message
-				wp_send_json_error( array( 'message' => sprintf( '<div class="ps-smush-error">' . __( "Unable to smush image, %s", "ps-medienoptimierung" ) . '</div>', $smushed->get_error_message() ) ) );
+				wp_send_json_error( array( 'message' => sprintf( '<div class="ps-smush-error">' . __( "Bild konnte nicht optimiert werden: %s", "ps-medienoptimierung" ) . '</div>', $smushed->get_error_message() ) ) );
 
 			}
 		}

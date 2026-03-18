@@ -33,7 +33,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 			//Hook early for free version, in order to display it before the advanced settings
 			add_action( 'ps_smush_before_advanced_settings', array( $this, 'ui' ) );
 
-			//Hook UI at the end of Settings UI
+			//Hook UI at the end of Einstellungen UI
 			add_action( 'smush_settings_ui_bottom', array( $this, 'ui' ) );
 
 			//Output Stats after Resize savings
@@ -86,7 +86,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 				$human   = ! empty( $dir_smush_stats['dir_smush']['bytes'] ) && $dir_smush_stats['dir_smush']['bytes'] > 0 ? $dir_smush_stats['dir_smush']['bytes'] : 0;
 				$percent = ! empty( $dir_smush_stats['dir_smush']['percent'] ) && $dir_smush_stats['dir_smush']['percent'] > 0 ? number_format_i18n( $dir_smush_stats['dir_smush']['percent'], 1, '.', '' ) : 0;
 			}?>
-            <!-- Savings from Directory Smush -->
+            <!-- Einsparungen from Directory Smush -->
             <div class="row smush-dir-savings">
             <span class="float-l ps-smush-stats-label"><strong><?php esc_html_e( "Directory-smush savings", "ps-medienoptimierung" ); ?></strong></span>
             <span class="ps-smush-stats<?php echo $human > 0 ? ' float-r' : ' float-l'?>">
@@ -247,7 +247,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 			wp_nonce_field( 'smush_get_image_list', 'image_list_nonce' );
 
 			/** Directory Browser and Image List **/
-			$wpsmush_bulkui->container_header( 'ps-smush-dir-browser', 'ps-smush-dir-browser', esc_html__( "DIRECTORY SMUSH", "ps-medienoptimierung" ) ); ?>
+			$wpsmush_bulkui->container_header( 'ps-smush-dir-browser', 'ps-smush-dir-browser', esc_html__( "ORDNER-OPTIMIERUNG", "ps-medienoptimierung" ) ); ?>
             <div class="box-content">
             <div class="row">
                 <div class="ps-smush-dir-desc roboto-regular">
@@ -268,14 +268,14 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
                         <i class="icon-fi-check-tick"></i><?php esc_html_e( "All images for the selected directory are smushed and up to date. Awesome!", "ps-medienoptimierung" ); ?>
                     </div>
                     <div class="ps-smush-notice ps-smush-dir-remaining hidden">
-                        <i class="icon-fi-warning-alert"></i><?php printf( esc_html__( "%s/%s image(s) were successfully smushed, however %s image(s) could not be smushed due to an error.", "ps-medienoptimierung" ), '<span class="ps-smush-dir-smushed"></span>', '<span class="ps-smush-dir-total"></span>', '<span class="ps-smush-dir-remaining"></span>' ); ?>
+                        <i class="icon-fi-warning-alert"></i><?php printf( esc_html__( "%s/%s Bild(er) erfolgreich optimiert, jedoch konnte(n) %s Bild(er) wegen eines Fehlers nicht optimiert werden.", "ps-medienoptimierung" ), '<span class="ps-smush-dir-smushed"></span>', '<span class="ps-smush-dir-total"></span>', '<span class="ps-smush-dir-remaining"></span>' ); ?>
                     </div>
                     <div class="ps-smush-notice ps-smush-dir-limit hidden">
-	                        <i class="icon-fi-info"></i><?php esc_html_e( 'Directory optimization is processed in background batches.', 'ps-medienoptimierung' ); ?>
+	                        <i class="icon-fi-info"></i><?php esc_html_e( 'Die Ordner-Optimierung wird im Hintergrund in Stapeln verarbeitet.', 'ps-medienoptimierung' ); ?>
                     </div>
                     <div class="ps-smush-all-button-wrap bottom">
                         <!-- @todo: Check status of the images in last scan and do not show smush now button, if already finished -->
-                        <button class="ps-smush-start"><?php esc_html_e( "BULK SMUSH", "ps-medienoptimierung" ); ?></button>
+                        <button class="ps-smush-start"><?php esc_html_e( "BULK-OPTIMIERUNG", "ps-medienoptimierung" ); ?></button>
                         <button type="button"
                                 title="<?php esc_html_e( "Click to stop the directory smushing process.", "ps-medienoptimierung" ); ?>"
                                 class="button button-grey ps-smush-pause disabled"><?php esc_html_e( "CANCEL", "ps-medienoptimierung" ); ?></button>
@@ -373,7 +373,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 						$file_path = path_join( $postDir, $file );
 						if ( file_exists( $file_path ) && $file != '.' && $file != '..' ) {
 							if ( is_dir( $file_path ) && ! $this->skip_dir( $file_path ) ) {
-								//Skip Uploads folder - Media Files
+								//Überspringen Uploads folder - Media Files
 								$list .= "<li class='directory collapsed'><a rel='" . $htmlRel . "/' tabindex='0'>" . $htmlName . "</a></li><br />";
 							} else if ( in_array( $ext, $supported_image ) && ! $this->is_media_library_file( $file_path ) ) {
 								$list .= "<li class='file ext_{$ext}'><a rel='" . $htmlRel . "' tabindex='0'>" . $htmlName . "</a></li><br />";
@@ -456,7 +456,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 		        </div>
 		    </div>";
 
-			$content .= 0 == $width ? "<a href='#' class='ps-smush-exclude-dir' data-path='" . $dir_path . "' title='" . esc_html__( "Exclude directory from Smush List", "ps-medienoptimierung" ) . "'>&times;</a>" : '';
+			$content .= 0 == $width ? "<a href='#' class='ps-smush-exclude-dir' data-path='" . $dir_path . "' title='" . esc_html__( "Ordner von der Optimierungsliste ausschließen", "ps-medienoptimierung" ) . "'>&times;</a>" : '';
 
 			return $content;
 		}
@@ -505,7 +505,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 			@ini_set('memory_limit','256M');
 			foreach ( $iterator as $path ) {
 
-				//Used in place of Skip Dots, For php 5.2 compatability
+				//Used in place of Überspringen Dots, For php 5.2 compatability
 				if ( basename( $path ) == '..' || basename( $path ) == '.' ) {
 					continue;
 				}
@@ -595,7 +595,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 		 * Sends a Ajax response if no images are found in selected directory
 		 */
 		function send_error() {
-			$message = sprintf( "<div class='ps-smush-info notice notice-info roboto-regular'>%s</div>", esc_html__( "We could not find any images in the selected directory.", "ps-medienoptimierung" ) );
+			$message = sprintf( "<div class='ps-smush-info notice notice-info roboto-regular'>%s</div>", esc_html__( "In dem ausgewählten Ordner wurden keine Bilder gefunden.", "ps-medienoptimierung" ) );
 			wp_send_json_error( array( 'message' => $message ) );
 		}
 
@@ -733,7 +733,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 
 			$skip = false;
 
-			//Skip sites folder for Multisite
+			//Überspringen sites folder for Multisite
 			if ( false !== strpos( $path, $base_dir . '/sites' ) ) {
 				$skip = true;
 			} else if ( false !== strpos( $path, $base_dir ) ) {
@@ -917,7 +917,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 						$div .= "<hr/>";
 					}
 
-					$div .= "<div class='image-list-wrapper'><span class='ps-smush-li-path'>{$image_path} <span class='ps-smush-image-count'>" . sprintf( esc_html__( "%d images", "ps-medienoptimierung" ), $count ) . "</span></span>";
+					$div .= "<div class='image-list-wrapper'><span class='ps-smush-li-path'>{$image_path} <span class='ps-smush-image-count'>" . sprintf( esc_html__( "%d Bilder", "ps-medienoptimierung" ), $count ) . "</span></span>";
 					$div .= $this->progress_ui( $count, $optimised_count, $image_path ) . '</div>';
 					$div .= "<ul class='ps-smush-image-list-inner' tabindex='0'>";
 					foreach ( $image as $item ) {
@@ -950,7 +950,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 				$index ++;
 			}
 			$div .= '</ul>';
-			$div .= "<span class='waiting-message hidden' title='" . esc_html__( "Waiting..", "ps-medienoptimierung" ) . "'></span>";
+			$div .= "<span class='waiting-message hidden' title='" . esc_html__( "Warte..", "ps-medienoptimierung" ) . "'></span>";
 
 			return $div;
 
@@ -1072,7 +1072,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 			$error_msg = '';
 			if ( empty( $_GET['image_id'] ) ) {
 				//If there are no stats
-				$error_msg = esc_html__( "Incorrect image id", "ps-medienoptimierung" );
+				$error_msg = esc_html__( "Ungültige Bild-ID", "ps-medienoptimierung" );
 				wp_send_json_error( $error_msg );
 			}
 
@@ -1106,7 +1106,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 
 			if ( empty( $image ) ) {
 				//If there are no stats
-				$error_msg = esc_html__( "Could not find image id in last scanned images", "ps-medienoptimierung" );
+				$error_msg = esc_html__( "Bild-ID im letzten Scan nicht gefunden", "ps-medienoptimierung" );
 				wp_send_json_error( $error_msg );
 			}
 
@@ -1119,7 +1119,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 				$error_msg = $smush_results->get_error_message();
 			} else if ( empty( $smush_results['data'] ) ) {
 				//If there are no stats
-				$error_msg = esc_html__( "Image couldn't be optimized", "ps-medienoptimierung" );
+				$error_msg = esc_html__( "Bild konnte nicht optimiert werden", "ps-medienoptimierung" );
 			}
 
 			if ( ! empty( $error_msg ) ) {
@@ -1163,7 +1163,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 					$stats['super_smushed'] = $wpsmushit_admin->super_smushed;
 				}
 				// Set tootltip text to update.
-				$stats['tooltip_text'] = ! empty( $stats['total_images'] ) ? sprintf( __( "You've smushed %d images in total.", "ps-medienoptimierung" ), $stats['total_images'] ) : '';
+				$stats['tooltip_text'] = ! empty( $stats['total_images'] ) ? sprintf( __( "Du hast insgesamt %d Bilder optimiert.", "ps-medienoptimierung" ), $stats['total_images'] ) : '';
 				// Get the total dir smush stats.
 				$total = $wpsmushit_admin->dir_stats;
 			} else {
@@ -1240,7 +1240,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 
 			//If we don't get an error path, return an error message
 			if ( empty( $dir_path ) ) {
-				$message = "<div class='error'>" . esc_html__( "We were unable to retrieve the image list from last scan, please continue with the latest scan", "ps-medienoptimierung" ) . "</div>";
+				$message = "<div class='error'>" . esc_html__( "Die Bildliste des letzten Scans konnte nicht abgerufen werden. Bitte starte einen neuen Scan.", "ps-medienoptimierung" ) . "</div>";
 				wp_send_json_error( array( 'message' => $message ) );
 			}
 
@@ -1259,9 +1259,9 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 		}
 
 		/**
-		 * Combine the stats from Directory Smush and Media Library Smush
+		 * Combine the stats from Directory Smush and Medienbibliothek Smush
 		 *
-		 * @param $stats Directory Smush stats
+		 * @param $stats Directory Optimierungs-Statistiken
 		 *
 		 * @return array Combined array of Stats
 		 */
@@ -1296,14 +1296,14 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 				'percent'       => round( $percent, 1 ),
 				'image_count'   => $total_images,
 				'dash_offset'   => $total_attachments > 0 ? $dasharray - ( $dasharray * ( $smushed / $total_attachments ) ) : $dasharray,
-				'tooltip_text'  => ! empty( $total_images ) ? sprintf( __( "You've smushed %d images in total.", "ps-medienoptimierung" ), $total_images ) : ''
+				'tooltip_text'  => ! empty( $total_images ) ? sprintf( __( "Du hast insgesamt %d Bilder optimiert.", "ps-medienoptimierung" ), $total_images ) : ''
 			);
 
 			return $result;
 		}
 
 		/**
-		 * Returns Directory Smush stats and Cumulative stats
+		 * Returns Directory Optimierungs-Statistiken and Cumulative stats
 		 *
 		 */
 		function get_dir_smush_stats() {

@@ -57,9 +57,9 @@ if ( ! class_exists( 'WpSmushS3' ) ) {
 		function register( $settings ) {
 			$plugin_url     = esc_url( "https://wordpress.org/plugins/amazon-s3-and-cloudfront/" );
 			$settings['s3'] = array(
-				'label'       => esc_html__( 'Enable Amazon S3 support', 'ps-medienoptimierung' ),
+				'label'       => esc_html__( 'Amazon S3-Unterstützung aktivieren', 'ps-medienoptimierung' ),
 				'short_label' => esc_html__( 'Amazon S3', 'ps-medienoptimierung' ),
-				'desc'        => sprintf( esc_html__( "Storing your image on S3 buckets using %sWP Offload S3%s? Smush can detect and smush those assets for you, including when you're removing files from your host server.", 'ps-medienoptimierung' ), "<a href='" . $plugin_url . "' target = '_blank'>", "</a>", "<b>", "</b>" )
+				'desc'        => sprintf( esc_html__( "Du speicherst deine Bilder in S3-Buckets über %sWP Offload S3%s? Aktiviere diese Option, damit die Optimierung diese Assets automatisch erkennt und verarbeitet – auch wenn Dateien vom Server entfernt werden.", 'ps-medienoptimierung' ), "<a href='" . $plugin_url . "' target = '_blank'>", "</a>", "<b>", "</b>" )
 			);
 
 			return $settings;
@@ -109,7 +109,7 @@ if ( ! class_exists( 'WpSmushS3' ) ) {
 			//In case for some reason, we couldn't find the function
 			if ( ! is_object( $as3cf ) || ! method_exists( $as3cf, 'is_plugin_setup' ) ) {
 				$show_error         = true;
-				$this->setup_notice = esc_html__( 'We are having trouble interacting with WP Offload S3. Make sure the plugin is active and configured.', 'ps-medienoptimierung' );
+				$this->setup_notice = esc_html__( 'Beim Zugriff auf WP Offload S3 ist ein Problem aufgetreten. Stelle sicher, dass das Plugin aktiv und konfiguriert ist.', 'ps-medienoptimierung' );
 			}
 
 			//Plugin is not setup, or some information is missing
@@ -169,10 +169,10 @@ if ( ! class_exists( 'WpSmushS3' ) ) {
 			}
 
 			wp_enqueue_script( 'ps-medienoptimierung-notice-js' );
-			// Settings link.
+			// Einstellungen link.
 			$settings_link = is_multisite() && $wpsmush_settings->settings['networkwide'] ? network_admin_url( 'settings.php?page=ps-smush' ) : admin_url( 'upload.php?page=ps-smush-bulk' );
 
-			$message = sprintf( __( "We can see you have WP Offload S3 installed with the <strong>Remove Files From Server</strong> option activated. To optimize S3 images, enable <a href='%s'><strong>Amazon S3 Support</strong></a> in this plugin's settings.", 'ps-medienoptimierung' ), $settings_link );
+$message = sprintf( __( "WP Offload S3 ist installiert und die Option <strong>Dateien vom Server entfernen</strong> ist aktiv. Um S3-Bilder zu optimieren, aktiviere die <a href='%s'><strong>Amazon S3-Unterstützung</strong></a> in den Einstellungen.", 'ps-medienoptimierung' ), $settings_link );
 
 			echo '<div class="ps-smush-notice ps-smush-s3support-alert notice"><span class="notice-message">' . $message . '</span><i class="icon-fi-close"></i></div>';
 		}

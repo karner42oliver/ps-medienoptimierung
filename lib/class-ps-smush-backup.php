@@ -145,14 +145,14 @@ if ( ! class_exists( 'WpSmushBackup' ) ) {
 				if ( empty( $_POST['attachment_id'] ) || empty( $_POST['_nonce'] ) ) {
 					wp_send_json_error( array(
 						'error'   => 'empty_fields',
-						'message' => esc_html__( "Error in processing restore action, Fields empty.", "ps-medienoptimierung" )
+						'message' => esc_html__( "Fehler beim Wiederherstellen – Felder leer.", "ps-medienoptimierung" )
 					) );
 				}
 				//Check Nonce
 				if ( ! wp_verify_nonce( $_POST['_nonce'], "ps-smush-restore-" . $_POST['attachment_id'] ) ) {
 					wp_send_json_error( array(
 						'error'   => 'empty_fields',
-						'message' => esc_html__( "Image not restored, Nonce verification failed.", "ps-medienoptimierung" )
+						'message' => esc_html__( "Bild nicht wiederhergestellt, Nonce-Verifizierung fehlgeschlagen.", "ps-medienoptimierung" )
 					) );
 				}
 			}
@@ -279,7 +279,7 @@ if ( ! class_exists( 'WpSmushBackup' ) ) {
 			//Remove the transient
 			delete_transient( "ps-smush-restore-$attachment_id" );
 			if ( $resp ) {
-				wp_send_json_error( array( 'message' => '<div class="ps-smush-error">' . __( "Unable to restore image", "ps-medienoptimierung" ) . '</div>' ) );
+				wp_send_json_error( array( 'message' => '<div class="ps-smush-error">' . __( "Bild konnte nicht wiederhergestellt werden", "ps-medienoptimierung" ) . '</div>' ) );
 			}
 
 			return false;

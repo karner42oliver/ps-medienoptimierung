@@ -190,10 +190,10 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 			$percent        = $percent < 0 ? 0 : $percent;
 
 			if ( isset( $ps_smush_data['stats']['size_before'] ) && $ps_smush_data['stats']['size_before'] == 0 && ! empty( $ps_smush_data['sizes'] ) ) {
-				$status_txt  = __( 'Already Optimized', 'ps-medienoptimierung' );
+				$status_txt  = __( 'Bereits optimiert', 'ps-medienoptimierung' );
 			} else {
 				if ( $bytes == 0 || $percent == 0 ) {
-					$status_txt = __( 'Already Optimized', 'ps-medienoptimierung' );
+					$status_txt = __( 'Bereits optimiert', 'ps-medienoptimierung' );
 
 					//Add resmush option if needed
 					$show_resmush = $this->show_resmush( $show_resmush, $ps_smush_data );
@@ -202,7 +202,7 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 					}
 
 				} elseif ( ! empty( $percent ) && ! empty( $bytes_readable ) ) {
-					$status_txt = sprintf( __( "Reduced by %s (  %01.1f%% )", 'ps-medienoptimierung' ), $bytes_readable, number_format_i18n( $percent, 2, '.', '' ) );
+					$status_txt = sprintf( __( "Reduziert um %s (  %01.1f%% )", 'ps-medienoptimierung' ), $bytes_readable, number_format_i18n( $percent, 2, '.', '' ) );
 
 					$show_resmush = $this->show_resmush( $show_resmush, $ps_smush_data );
 
@@ -233,7 +233,7 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 							$status_txt .= '<br />';
 						}
 						//Detailed Stats Link
-						$status_txt .= '<a href="#" class="smush-stats-details">' . esc_html__( "Smush stats", 'ps-medienoptimierung' ) . ' [<span class="stats-toggle">+</span>]</a>';
+						$status_txt .= '<a href="#" class="smush-stats-details">' . esc_html__( "Optimierungs-Statistiken", 'ps-medienoptimierung' ) . ' [<span class="stats-toggle">+</span>]</a>';
 
 						//Get metadata For the image
 						// Registry Object for NextGen Gallery
@@ -271,7 +271,7 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 			//Check if premium user, compression was lossless, and lossy compression is enabled
 			if ( !$show_resmush && $this->is_pro_user && ! $is_lossy && $opt_lossy_val && ! empty( $image_type ) && $image_type != 'image/gif' ) {
 				// the button text
-				$button_txt  = __( 'Super-Smush', 'ps-medienoptimierung' );
+				$button_txt  = __( 'Super-Optimierung', 'ps-medienoptimierung' );
 				$show_button = true;
 			}
 			if ( $text_only ) {
@@ -364,7 +364,7 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 		}
 
 		/**
-		 * Get the Nextgen Smush stats
+		 * Get the Nextgen Optimierungs-Statistiken
 		 * @return bool|mixed|void
 		 */
 		function get_smush_stats() {
@@ -436,8 +436,8 @@ if ( ! class_exists( 'WpSmushNextGenStats' ) ) {
 				<table class="ps-smush-stats-holder">
 					<thead>
 						<tr>
-							<th><strong>' . esc_html__( 'Image size', 'ps-medienoptimierung' ) . '</strong></th>
-							<th><strong>' . esc_html__( 'Savings', 'ps-medienoptimierung' ) . '</strong></th>
+							<th><strong>' . esc_html__( 'Bildgröße', 'ps-medienoptimierung' ) . '</strong></th>
+							<th><strong>' . esc_html__( 'Einsparungen', 'ps-medienoptimierung' ) . '</strong></th>
 						</tr>
 					</thead>
 					<tbody>';

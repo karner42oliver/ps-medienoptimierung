@@ -33,7 +33,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 	class WpSmushitAdmin extends WpSmush {
 
 		/**
-		 * @var array Settings
+		 * @var array Einstellungen
 		 */
 		public $settings;
 
@@ -146,7 +146,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 			// hook custom screen
 			add_action( 'admin_menu', array( $this, 'screen' ) );
 
-			//Network Settings Page
+			//Network Einstellungen Page
 			add_action( 'network_admin_menu', array( $this, 'screen' ) );
 
 			//Handle Smush Bulk Ajax
@@ -199,7 +199,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 			// Local fork: no membership validation notice.
 
 			/**
-			 * Handle Skip Quick Setup action
+			 * Handle Überspringen Quick Setup action
 			 */
 			add_action( 'wp_ajax_skipSmushSetup', array( $this, 'skipSmushSetup' ) );
 
@@ -224,44 +224,44 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 		function init_settings() {
 			$this->settings = array(
 				'networkwide'     => array(
-					'label'       => esc_html__( 'Use network settings for all the sub-sites.', 'ps-medienoptimierung' ),
-					'short_label' => esc_html__( 'Multisite Control', 'ps-medienoptimierung' ),
-					'desc'        => esc_html__( 'Choose whether you want to use network settings for all sub-sites or whether sub-site admins can control Smush’s settings.', 'ps-medienoptimierung' )
+					'label'       => esc_html__( 'Netzwerkeinstellungen für alle Unterwebseiten verwenden.', 'ps-medienoptimierung' ),
+					'short_label' => esc_html__( 'Multisite-Steuerung', 'ps-medienoptimierung' ),
+					'desc'        => esc_html__( 'Lege fest, ob Netzwerkeinstellungen für alle Unterwebseiten gelten oder ob Unterwebseiten-Admins die Optimierungs-Einstellungen selbst steuern können.', 'ps-medienoptimierung' )
 				),
 				'auto'            => array(
-					'label'       => esc_html__( 'Automatically smush my images on upload', 'ps-medienoptimierung' ),
-					'short_label' => esc_html__( 'Automatic Smush', 'ps-medienoptimierung' ),
-					'desc'        => esc_html__( 'When you upload images to your site, Smush will automatically optimize them for you.', 'ps-medienoptimierung' )
+					'label'       => esc_html__( 'Bilder beim Hochladen automatisch optimieren', 'ps-medienoptimierung' ),
+					'short_label' => esc_html__( 'Automatische Optimierung', 'ps-medienoptimierung' ),
+					'desc'        => esc_html__( 'Wenn du Bilder hochlädst, werden sie automatisch für dich optimiert.', 'ps-medienoptimierung' )
 				),
 				'lossy'           => array(
-					'label'       => esc_html__( 'Super-smush my images', 'ps-medienoptimierung' ),
-					'short_label' => esc_html__( 'Super-smush', 'ps-medienoptimierung' ),
-					'desc'        => esc_html__( 'Compress images up to 2x more than regular smush with almost no visible drop in quality.', 'ps-medienoptimierung' )
+					'label'       => esc_html__( 'Super-Optimierung aktivieren', 'ps-medienoptimierung' ),
+					'short_label' => esc_html__( 'Super-Optimierung', 'ps-medienoptimierung' ),
+					'desc'        => esc_html__( 'Komprimiere Bilder bis zu 2× stärker als bei der normalen Optimierung – bei kaum sichtbarem Qualitätsverlust.', 'ps-medienoptimierung' )
 				),
 				'original'        => array(
-					'label'       => esc_html__( 'Smush my original full-size images', 'ps-medienoptimierung' ),
-					'short_label' => esc_html__( 'Full size images', 'ps-medienoptimierung' ),
-					'desc'        => esc_html__( 'Every time you upload an image to your site, WordPress generates a resized version of that image for every default and/or custom image size that your theme has registered. This means there are multiple versions of your images in your media library. By default, Smush only compresses these generated image. Activate this setting to also smush your original images. Note: Activating this setting doesn’t usually improve page speed.', 'ps-medienoptimierung' )
+					'label'       => esc_html__( 'Originalbilder in voller Größe optimieren', 'ps-medienoptimierung' ),
+					'short_label' => esc_html__( 'Originalbilder', 'ps-medienoptimierung' ),
+					'desc'        => esc_html__( 'Jedes Mal, wenn du ein Bild hochlädst, erstellt WordPress für jede registrierte Bildgröße deines Themes eine neue Version. Standardmäßig werden nur diese generierten Versionen optimiert. Aktiviere diese Einstellung, um auch deine Originalbilder zu optimieren. Hinweis: Das verbessert in der Regel nicht die Ladegeschwindigkeit.', 'ps-medienoptimierung' )
 				),
 				'keep_exif'       => array(
-					'label'       => esc_html__( 'Preserve my image EXIF data', 'ps-medienoptimierung' ),
-					'short_label' => esc_html__( 'EXIF data', 'ps-medienoptimierung' ),
-					'desc'        => esc_html__( 'EXIF data stores camera settings, focal length, date, time and location information in image files. EXIF data makes image files larger but if you are a photographer you may want to preserve this information.', 'ps-medienoptimierung' )
+					'label'       => esc_html__( 'EXIF-Daten beibehalten', 'ps-medienoptimierung' ),
+					'short_label' => esc_html__( 'EXIF-Daten', 'ps-medienoptimierung' ),
+					'desc'        => esc_html__( 'EXIF-Daten speichern Kameraeinstellungen, Brennweite, Datum, Uhrzeit und Standortinformationen in Bilddateien. Diese vergrößern die Dateien – als Fotograf möchtest du diese Daten evtl. erhalten.', 'ps-medienoptimierung' )
 				),
 				'resize'          => array(
-					'label'       => esc_html__( 'Resize my full size images', 'ps-medienoptimierung' ),
-					'short_label' => esc_html__( 'Full size images', 'ps-medienoptimierung' ),
-					'desc'        => esc_html__( 'Set a maximum height and width for all images uploaded to your site so that any unnecessarily large images are automatically resized before they are added to the media gallery. This setting does not apply to images smushed using Directory Smush feature.', 'ps-medienoptimierung' )
+					'label'       => esc_html__( 'Originalbilder skalieren', 'ps-medienoptimierung' ),
+					'short_label' => esc_html__( 'Originalbilder', 'ps-medienoptimierung' ),
+					'desc'        => esc_html__( 'Lege eine maximale Höhe und Breite für hochgeladene Bilder fest. Zu große Bilder werden automatisch skaliert, bevor sie in die Medienbibliothek kommen. Diese Einstellung gilt nicht für die Ordner-Optimierung.', 'ps-medienoptimierung' )
 				),
 				'backup'          => array(
-					'label'       => esc_html__( 'Make a copy of my full size images', 'ps-medienoptimierung' ),
-					'short_label' => esc_html__( 'Full size images', 'ps-medienoptimierung' ),
-					'desc'        => esc_html__( 'Save your original full-size images separately so you can restore them at any point. Note: Keeping a copy of your original files can significantly increase the size of your uploads folder by nearly twice as much.', 'ps-medienoptimierung' )
+					'label'       => esc_html__( 'Kopie der Originalbilder erstellen', 'ps-medienoptimierung' ),
+					'short_label' => esc_html__( 'Originalbilder', 'ps-medienoptimierung' ),
+					'desc'        => esc_html__( 'Die Originalbilder werden separat gespeichert, damit du sie jederzeit wiederherstellen kannst. Hinweis: Das kann den Upload-Ordner fast verdoppeln.', 'ps-medienoptimierung' )
 				),
 				'png_to_jpg'      => array(
-					'label'       => esc_html__( 'Auto-convert PNGs to JPEGs (lossy)', 'ps-medienoptimierung' ),
-					'short_label' => esc_html__( 'PNG to JPEG conversion', 'ps-medienoptimierung' ),
-					'desc'        => esc_html__( "When you compress a PNG file, Smush will check if converting the file to JPEG will further reduce its size.", 'ps-medienoptimierung' )
+					'label'       => esc_html__( 'PNGs automatisch in JPEGs umwandeln (verlustbehaftet)', 'ps-medienoptimierung' ),
+					'short_label' => esc_html__( 'PNG-zu-JPEG-Konvertierung', 'ps-medienoptimierung' ),
+					'desc'        => esc_html__( "Beim Komprimieren einer PNG-Datei wird geprüft, ob eine Konvertierung zu JPEG die Dateigröße weiter reduziert.", 'ps-medienoptimierung' )
 				)
 			);
 
@@ -289,7 +289,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 				'ui'
 			) );
 
-			//Network Settings Page
+			//Network Einstellungen Page
 			$page = 'settings.php';
 			$cap  = 'manage_network_options';
 
@@ -385,24 +385,24 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 			$handle = 'ps-medienoptimierung-admin-js';
 
 			$ps_smush_msgs = array(
-				'resmush'                 => esc_html__( 'Super-Smush', 'ps-medienoptimierung' ),
-				'smush_now'               => esc_html__( 'Smush Now', 'ps-medienoptimierung' ),
-				'error_in_bulk'           => esc_html__( '{{errors}} image(s) were skipped due to an error.', 'ps-medienoptimierung' ),
-				'all_resmushed'           => esc_html__( 'All images are fully optimized.', 'ps-medienoptimierung' ),
-				'restore'                 => esc_html__( "Restoring image..", "ps-medienoptimierung" ),
-				'smushing'                => esc_html__( "Smushing image..", "ps-medienoptimierung" ),
-				'checking'                => esc_html__( "Checking images..", "ps-medienoptimierung" ),
+				'resmush'                 => esc_html__( 'Super-Optimierung', 'ps-medienoptimierung' ),
+				'smush_now'               => esc_html__( 'Jetzt optimieren', 'ps-medienoptimierung' ),
+				'error_in_bulk'           => esc_html__( '{{errors}} Bild(er) wurden wegen eines Fehlers übersprungen.', 'ps-medienoptimierung' ),
+				'all_resmushed'           => esc_html__( 'Alle Bilder sind vollständig optimiert.', 'ps-medienoptimierung' ),
+				'restore'                 => esc_html__( "Bild wird wiederhergestellt..", "ps-medienoptimierung" ),
+				'smushing'                => esc_html__( "Bild wird optimiert..", "ps-medienoptimierung" ),
+				'checking'                => esc_html__( "Bilder werden geprüft..", "ps-medienoptimierung" ),
 				'membership_valid'        => esc_html__( 'Alle Optimierungsfunktionen sind aktiv.', 'ps-medienoptimierung' ),
 				'membership_invalid'      => esc_html__( 'Mitgliedschafts-Checks sind in dieser lokalen Version deaktiviert.', 'ps-medienoptimierung' ),
-				'missing_path'            => esc_html__( "Missing file path.", "ps-medienoptimierung" ),
+				'missing_path'            => esc_html__( "Dateipfad fehlt.", "ps-medienoptimierung" ),
 				//Used by Directory Smush
-				'unfinished_smush_single' => esc_html__( "image could not be smushed.", "ps-medienoptimierung" ),
-				'unfinished_smush'        => esc_html__( "images could not be smushed.", "ps-medienoptimierung" ),
-				'already_optimised'       => esc_html__( "Already Optimized", "ps-medienoptimierung" ),
-				'ajax_error'              => esc_html__( "Ajax Error", "ps-medienoptimierung" ),
-				'all_done'                => esc_html__( "All Done!", "ps-medienoptimierung" ),
-				'quick_setup_title'       => __( "QUICK SETUP", "ps-medienoptimierung" ) . '<form method="post" class="smush-skip-setup float-r"><input type="hidden" name="action" value="skipSmushSetup"/>' . wp_nonce_field( 'skipSmushSetup', '_wpnonce', true, false ) . '<button type="submit" class="button button-small button-secondary skip-button">' . __( "Skip", "ps-medienoptimierung" ) . '</button></form>',
-				'sync_stats'              => esc_html__( "Give us a moment while we sync the stats.", "ps-medienoptimierung" )
+				'unfinished_smush_single' => esc_html__( "Bild konnte nicht optimiert werden.", "ps-medienoptimierung" ),
+				'unfinished_smush'        => esc_html__( "Bilder konnten nicht optimiert werden.", "ps-medienoptimierung" ),
+				'already_optimised'       => esc_html__( "Bereits optimiert", "ps-medienoptimierung" ),
+				'ajax_error'              => esc_html__( "Ajax-Fehler", "ps-medienoptimierung" ),
+				'all_done'                => esc_html__( "Fertig!", "ps-medienoptimierung" ),
+				'quick_setup_title'       => __( "SCHNELLEINRICHTUNG", "ps-medienoptimierung" ) . '<form method="post" class="smush-skip-setup float-r"><input type="hidden" name="action" value="skipSmushSetup"/>' . wp_nonce_field( 'skipSmushSetup', '_wpnonce', true, false ) . '<button type="submit" class="button button-small button-secondary skip-button">' . __( "Überspringen", "ps-medienoptimierung" ) . '</button></form>',
+				'sync_stats'              => esc_html__( "Einen Moment, die Statistiken werden synchronisiert.", "ps-medienoptimierung" )
 			);
 
 			wp_localize_script( $handle, 'ps_smush_msgs', $ps_smush_msgs );
@@ -577,7 +577,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 				wp_send_json_error(
 					array(
 						'error'         => 'missing_id',
-						'error_message' => sprintf( esc_html__( "%s%d%s Attachment(s) could not be smushed, as no ID was received.", "ps-medienoptimierung" ), '<span class="image-error-count">', 1, '</span>' ),
+						'error_message' => sprintf( esc_html__( "%s%d%s Bild(er) konnten nicht optimiert werden – keine ID empfangen.", "ps-medienoptimierung" ), '<span class="image-error-count">', 1, '</span>' ),
 						'error_class'   => 'no_id'
 					)
 				);
@@ -593,7 +593,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 				wp_send_json_error(
 					array(
 						'error'         => 'bulk_request_image_limit_exceeded',
-						'error_message' => sprintf( esc_html__( "You've exceeded Bulk Smush limit of %d images at once for standard users. Click on Bulk Smush to continue.", "ps-medienoptimierung" ), $this->max_free_bulk ),
+						'error_message' => sprintf( esc_html__( "You've exceeded Bulk Smush limit of %d Bilder at once for standard users. Click on Bulk Smush to continue.", "ps-medienoptimierung" ), $this->max_free_bulk ),
 						'error_class'   => 'limit_exceeded',
 						'continue'      => false
 					)
@@ -617,7 +617,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 			if ( ! apply_filters( 'ps_smush_image', true, $attachment_id ) ) {
 				$send_error    = true;
 				$error         = 'skipped';
-				$error_message = $this->filter_error( sprintf( esc_html__( "%s%d%s Attachment(s) were skipped.", "ps-medienoptimierung" ), '<span class="image-error-count">', 1, '</span>' ) );
+				$error_message = $this->filter_error( sprintf( esc_html__( "%s%d%s Bild(er) wurden übersprungen.", "ps-medienoptimierung" ), '<span class="image-error-count">', 1, '</span>' ) );
 				$error_class   = 'skipped';
 			}
 
@@ -690,7 +690,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 				//Check for timeout error and suggest to filter timeout
 				if ( strpos( $error_message, 'timed out' ) ) {
 					$error         = 'timeout';
-					$error_message = sprintf( esc_html__( "%s%d%s Attachment(s) were not smushed due to a timeout error, You can increase the request timeout to make sure Smush has enough time to process larger files. `define('PS_SMUSH_API_TIMEOUT', 150);`", "ps-medienoptimierung" ), '<span class="image-error-count">', 1, "</span>" );
+					$error_message = sprintf( esc_html__( "%s%d%s Bild(er) konnten wegen eines Timeouts nicht optimiert werden. Du kannst den Request-Timeout erhöhen, damit die Optimierung genug Zeit für größere Dateien hat. `define('PS_SMUSH_API_TIMEOUT', 150);`", "ps-medienoptimierung" ), '<span class="image-error-count">', 1, "</span>" );
 					$error_class   = ' timeout';
 				}
 			} else {
@@ -749,11 +749,11 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 			@error_reporting( 0 );
 
 			if ( ! current_user_can( 'upload_files' ) ) {
-				wp_die( __( "You don't have permission to work with uploaded files.", 'ps-medienoptimierung' ) );
+				wp_die( __( "Du hast keine Berechtigung, hochgeladene Dateien zu bearbeiten.", 'ps-medienoptimierung' ) );
 			}
 
 			if ( ! isset( $_GET['attachment_id'] ) ) {
-				wp_die( __( 'No attachment ID was provided.', 'ps-medienoptimierung' ) );
+				wp_die( __( 'Keine Anhang-ID angegeben.', 'ps-medienoptimierung' ) );
 			}
 
 			$attachemnt_id = intval( $_GET['attachment_id'] );
@@ -765,7 +765,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 			 *
 			 */
 			if ( ! apply_filters( 'ps_smush_image', true, $attachemnt_id ) ) {
-				$error = $this->filter_error( esc_html__( "Attachment Skipped - Check `ps_smush_image` filter.", "ps-medienoptimierung" ), $attachemnt_id );
+				$error = $this->filter_error( esc_html__( "Bild übersprungen – Filter `ps_smush_image` prüfen.", "ps-medienoptimierung" ), $attachemnt_id );
 				wp_send_json_error( array(
 					'error_msg'    => sprintf( '<p class="ps-smush-error-message">%s</p>', $error ),
 					'show_warning' => intval( $this->show_warning() )
@@ -955,7 +955,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 					<?php
 					printf(
 						__(
-							'<strong>%d of %d images</strong> were sent for smushing:',
+							'<strong>%d of %d Bilder</strong> were sent for smushing:',
 							'ps-medienoptimierung'
 						),
 						count( $send_ids ), count( $received_ids )
@@ -1024,7 +1024,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 				if ( ! empty( $global_data ) ) {
 					foreach ( $global_data as $data ) {
 
-						//Skip attachment, if in re-smush list, or not in attachment list
+						//Überspringen attachment, if in re-smush list, or not in attachment list
 						if ( ( ! empty( $this->resmush_ids ) && in_array( $data->post_id, $this->resmush_ids ) ) || ! in_array( $data->post_id, $this->attachments ) ) {
 							continue;
 						}
@@ -1084,12 +1084,12 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 				$smush_data['total_images'] += $this->dir_stats['optimised'];
 			}
 
-			//Resize Savings
+			//Resize Einsparungen
 			$resize_savings               = $wpsmush_db->resize_savings( false );
 			$smush_data['resize_savings'] = ! empty( $resize_savings['bytes'] ) ? $resize_savings['bytes'] : 0;
 			$smush_data['resize_count']   = $wpsmush_db->resize_savings( false, false, true );
 
-			//Conversion Savings
+			//Conversion Einsparungen
 			$conversion_savings               = $wpsmush_db->conversion_savings( false );
 			$smush_data['conversion_savings'] = ! empty( $conversion_savings['bytes'] ) ? $conversion_savings['bytes'] : 0;
 
@@ -1102,7 +1102,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 			$smush_data['size_before'] += $resize_savings['size_before'];
 			$smush_data['size_after']  += $resize_savings['size_after'];
 
-			//Add Conversion Savings
+			//Add Conversion Einsparungen
 			$smush_data['bytes']       += $smush_data['conversion_savings'];
 			$smush_data['size_before'] += $conversion_savings['size_before'];
 			$smush_data['size_after']  += $conversion_savings['size_after'];
@@ -1144,13 +1144,13 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 			//Show Temporary Status, For Async Optimisation, No Good workaround
 			if ( ! get_transient( "ps-smush-restore-$id" ) && ! empty( $_POST['action'] ) && 'upload-attachment' == $_POST['action'] && $WpSmush->is_auto_smush_enabled() ) {
 				// the status
-				$status_txt = __( 'Smushing in progress..', 'ps-medienoptimierung' );
+				$status_txt = __( 'Optimierung läuft..', 'ps-medienoptimierung' );
 
 				// we need to show the smush button
 				$show_button = false;
 
 				// the button text
-				$button_txt = __( 'Smush Now!', 'ps-medienoptimierung' );
+				$button_txt = __( 'Jetzt optimieren!', 'ps-medienoptimierung' );
 
 				return $this->column_html( $id, $status_txt, $button_txt, $show_button, true, false, true );
 			}
@@ -1171,7 +1171,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 		function settings_link( $links, $url_only = false ) {
 
 			$settings_page = is_multisite() ? network_admin_url( 'settings.php?page=ps-smush' ) : admin_url( 'upload.php?page=ps-smush-bulk' );
-			$settings      = '<a href="' . $settings_page . '">' . __( 'Settings', 'ps-medienoptimierung' ) . '</a>';
+			$settings      = '<a href="' . $settings_page . '">' . __( 'Einstellungen', 'ps-medienoptimierung' ) . '</a>';
 
 			//Return Only settings page link
 			if ( $url_only ) {
@@ -1291,14 +1291,14 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 			if ( empty( $_POST['attachment_id'] ) || empty( $_POST['_nonce'] ) ) {
 				wp_send_json_error( array(
 					'error'   => 'empty_fields',
-					'message' => '<div class="ps-smush-error">' . esc_html__( "Image not smushed, fields empty.", "ps-medienoptimierung" ) . '</div>'
+					'message' => '<div class="ps-smush-error">' . esc_html__( "Bild nicht optimiert, Felder leer.", "ps-medienoptimierung" ) . '</div>'
 				) );
 			}
 			//Check Nonce
 			if ( ! wp_verify_nonce( $_POST['_nonce'], "ps-smush-resmush-" . $_POST['attachment_id'] ) ) {
 				wp_send_json_error( array(
 					'error'   => 'empty_fields',
-					'message' => '<div class="ps-smush-error">' . esc_html__( "Image couldn't be smushed as the nonce verification failed, try reloading the page.", "ps-medienoptimierung" ) . '</div>'
+					'message' => '<div class="ps-smush-error">' . esc_html__( "Bild konnte nicht optimiert werden, Nonce-Verifizierung fehlgeschlagen. Bitte lade die Seite neu.", "ps-medienoptimierung" ) . '</div>'
 				) );
 			}
 
@@ -1334,13 +1334,13 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 
 			//Save settings only if networkwide settings are disabled
 			if ( ( ! is_multisite() || ! $wpsmush_settings->is_network_enabled() ) && ( ! isset( $_REQUEST['process_settings'] ) || 'false' != $_REQUEST['process_settings'] ) ) {
-				//Save Settings
+				//Save Einstellungen
 				$wpsmush_settings->process_options();
 			}
 
 			//If there aren't any images in the library, return the notice
 			if ( 0 == $wpsmush_db->get_media_attachments( true ) ) {
-				$notice = esc_html__( "We haven’t found any images in your media library yet so there’s no smushing to be done! Once you upload images, reload this page and start playing!", "ps-medienoptimierung" );
+				$notice = esc_html__( "In deiner Medienbibliothek wurden noch keine Bilder gefunden – es gibt nichts zu optimieren! Lade Bilder hoch, lade diese Seite neu und leg los!", "ps-medienoptimierung" );
 				$resp   = '<div class="ps-smush-notice ps-smush-resmush-message" tabindex="0"><i class="icon-fi-check-tick"></i> ' . $notice . '
 				<i class="icon-fi-close"></i>
 				</div>';
@@ -1355,12 +1355,12 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 
 			//Default Notice, to be displayed at the top of page
 			//Show a message, at the top
-			$message = esc_html__( 'Yay! All images are optimized as per your current settings.', 'ps-medienoptimierung' );
+			$message = esc_html__( 'Super! Alle Bilder sind mit deinen aktuellen Einstellungen optimiert.', 'ps-medienoptimierung' );
 			$resp    = '<div class="ps-smush-notice ps-smush-resmush-message" tabindex="0"><i class="icon-fi-check-tick"></i> ' . $message . '
 				<i class="icon-fi-close"></i>
 				</div>';
 
-			//Scanning for NextGen or Media Library
+			//Scanning for NextGen or Medienbibliothek
 			$type = isset( $_REQUEST['type'] ) ? sanitize_text_field( $_REQUEST['type'] ) : '';
 
 			//If a user manually runs smush check
@@ -1374,7 +1374,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 			//Allow to smush Upfront images as well
 			$upfront_active = class_exists( 'Upfront' );
 
-			//Initialize Media Library Stats
+			//Initialize Medienbibliothek Stats
 			if ( 'nextgen' != $type && empty( $this->remaining_count ) ) {
 				$this->setup_global_stats();
 			}
@@ -1425,7 +1425,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 
 				foreach ( $attachments as $attachment_k => $attachment ) {
 
-					//Skip if already in resmush list
+					//Überspringen if already in resmush list
 					if ( ! empty( $wpsmushit_admin->resmush_ids ) && in_array( $attachment, $wpsmushit_admin->resmush_ids ) ) {
 						continue;
 					}
@@ -1558,7 +1558,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 			}
 
 			if ( ! empty( $resmush_list ) || $remaining_count > 0 ) {
-				$message = sprintf( esc_html__( "You have images that need smushing. %sBulk smush now!%s", "ps-medienoptimierung" ), '<a href="#" class="ps-smush-trigger-bulk">', '</a>' );
+				$message = sprintf( esc_html__( "Du hast Bilder, die noch optimiert werden müssen. %sJetzt alle optimieren!%s", "ps-medienoptimierung" ), '<a href="#" class="ps-smush-trigger-bulk">', '</a>' );
 				$resp    = '<div class="ps-smush-notice ps-smush-resmush-message ps-smush-resmush-pending" tabindex="0"><i class="icon-fi-check-tick"></i> ' . $message . '
 							<i class="icon-fi-close"></i>
 						</div>';
@@ -1718,7 +1718,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 		 *
 		 * @param array $stats Compression Stats
 		 *
-		 * @param string $key Meta Key for storing the Super Smushed ids (Optional for Media Library)
+		 * @param string $key Meta Key for storing the Super Smushed ids (Optional for Medienbibliothek)
 		 *                    Need To be specified for NextGen
 		 *
 		 * @return bool
@@ -1746,7 +1746,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 		}
 
 		/**
-		 * Delete the resmush list for Nextgen or the Media Library
+		 * Delete the resmush list for Nextgen or the Medienbibliothek
 		 *
 		 * Return Stats in ajax response
 		 *
@@ -1833,7 +1833,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 					$size_height = $_wp_additional_image_sizes[ $size ]['height'];
 				}
 
-				//Skip if no width and height
+				//Überspringen if no width and height
 				if ( ! isset( $size_width, $size_height ) ) {
 					continue;
 				}
@@ -2054,7 +2054,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 					continue;
 				}
 
-				//Skip premium features if not a member
+				//Überspringen premium features if not a member
 				if ( ! in_array( $name, $wpsmushit_admin->basic_features ) && ! $WpSmush->validate_install() ) {
 					continue;
 				}
@@ -2123,7 +2123,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 
 				wp_localize_script( 'smush-media-view', 'smush_vars', array(
 					'strings' => array(
-						'stats_label' => esc_html__( "Smush Stats", "ps-medienoptimierung" )
+						'stats_label' => esc_html__( "Optimierungs-Statistiken", "ps-medienoptimierung" )
 					),
 					'nonce'   => array(
 						'get_smush_status' => wp_create_nonce( 'get-smush-status' ),

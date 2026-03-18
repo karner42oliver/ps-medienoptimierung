@@ -3,7 +3,7 @@
 //Helper Class
 require_once PS_SMUSH_DIR . "lib/class-ps-smush-helper.php";
 
-//Settings Class
+//Einstellungen Class
 require_once PS_SMUSH_DIR . "lib/class-ps-smush-settings.php";
 
 //Migration Class
@@ -17,9 +17,6 @@ require_once PS_SMUSH_DIR . 'lib/class-ps-smush-resize.php';
 
 //Include PNG to JPG Converter
 require_once PS_SMUSH_DIR . 'lib/class-ps-smush-png_jpg.php';
-
-//Include Social Sharing
-require_once PS_SMUSH_DIR . 'lib/class-ps-smush-share.php';
 
 //Include Image backup class
 require_once PS_SMUSH_DIR . 'lib/class-ps-smush-backup.php';
@@ -91,7 +88,7 @@ if ( ! class_exists( 'WpSmush' ) ) {
 		 */
 		function __construct() {
 
-			//Redirect to Settings page
+			//Redirect to Einstellungen page
 			add_action( 'activated_plugin', array( $this, 'ps_smush_redirect' ) );
 
 			/**
@@ -126,7 +123,7 @@ if ( ! class_exists( 'WpSmush' ) ) {
 
 			// Local fork: no external dashboard integration.
 
-			//Send Smush Stats for pro members
+			//Send Optimierungs-Statistiken for pro members
 			add_action( 'wp_ajax_smush_show_warning', array( $this, 'show_warning_ajax' ) );
 
 			//Instanitate the Async class
@@ -194,13 +191,13 @@ if ( ! class_exists( 'WpSmush' ) ) {
 
 			//Check if file exists and the directory is writable
 			if ( empty( $file_path ) ) {
-				$errors->add( "empty_path", __( "File path is empty", 'ps-medienoptimierung' ) );
+				$errors->add( "empty_path", __( "Dateipfad ist leer", 'ps-medienoptimierung' ) );
 			} elseif ( ! file_exists( $file_path ) || ! is_file( $file_path ) ) {
 				// check that the file exists
-				$errors->add( "file_not_found", sprintf( __( "Could not find %s", 'ps-medienoptimierung' ), $file_path ) );
+				$errors->add( "file_not_found", sprintf( __( "%s wurde nicht gefunden", 'ps-medienoptimierung' ), $file_path ) );
 			} elseif ( ! is_writable( $dir_name ) ) {
 				// check that the file is writable
-				$errors->add( "not_writable", sprintf( __( "%s is not writable", 'ps-medienoptimierung' ), $dir_name ) );
+				$errors->add( "not_writable", sprintf( __( "%s ist nicht beschreibbar", 'ps-medienoptimierung' ), $dir_name ) );
 			}
 
 			$file_size = file_exists( $file_path ) ? filesize( $file_path ) : '';
@@ -210,10 +207,10 @@ if ( ! class_exists( 'WpSmush' ) ) {
 
 			//Check if file exists
 			if ( $file_size == 0 ) {
-				$errors->add( "image_not_found", '<p>' . sprintf( __( 'Skipped (%s), image not found. Attachment: %s', 'ps-medienoptimierung' ), size_format( $file_size, 1 ), basename( $file_path ) ) . '</p>' );
+				$errors->add( "image_not_found", '<p>' . sprintf( __( 'Übersprungen (%s), Bild nicht gefunden. Anhang: %s', 'ps-medienoptimierung' ), size_format( $file_size, 1 ), basename( $file_path ) ) . '</p>' );
 			} elseif ( $file_size > $max_size ) {
 				//Check size limit
-				$errors->add( "size_limit", '<p>' . sprintf( __( 'Skipped (%s), size limit exceeded. Attachment: %s', 'ps-medienoptimierung' ), size_format( $file_size, 1 ), basename( $file_path ) ) . '</p>' );
+				$errors->add( "size_limit", '<p>' . sprintf( __( 'Übersprungen (%s), Größenlimit überschritten. Anhang: %s', 'ps-medienoptimierung' ), size_format( $file_size, 1 ), basename( $file_path ) ) . '</p>' );
 			}
 
 			if ( count( $errors->get_error_messages() ) ) {
@@ -231,7 +228,7 @@ if ( ! class_exists( 'WpSmush' ) ) {
 				$errors->add( "false_response", $response['message'] );
 			} else if ( empty( $response['data'] ) ) {
 				//If there is no data
-				$errors->add( "no_data", __( 'Unknown API error', 'ps-medienoptimierung' ) );
+				$errors->add( "no_data", __( 'Unbekannter API-Fehler', 'ps-medienoptimierung' ) );
 			}
 
 			if ( count( $errors->get_error_messages() ) ) {
@@ -538,7 +535,7 @@ if ( ! class_exists( 'WpSmush' ) ) {
 					 *
 					 * @param int $ID Image Id
 					 *
-					 * @param array $stats Smush Stats for the image
+					 * @param array $stats Optimierungs-Statistiken for the image
 					 *
 					 */
 					do_action( 'ps_smush_image_optimised', $ID, $stats );
@@ -991,25 +988,25 @@ if ( ! class_exists( 'WpSmush' ) ) {
 				$show_resmush = $this->show_resmush( $id, $ps_smush_data );
 
 				if ( empty( $wp_resize_savings['bytes'] ) && isset( $ps_smush_data['stats']['size_before'] ) && $ps_smush_data['stats']['size_before'] == 0 && ! empty( $ps_smush_data['sizes'] ) ) {
-					$status_txt = __( 'Already Optimized', 'ps-medienoptimierung' );
+					$status_txt = __( 'Bereits optimiert', 'ps-medienoptimierung' );
 					if ( $show_resmush ) {
 						$status_txt .= '<br />' . $this->get_resmsuh_link( $id );
 					}
 					$show_button = false;
 				} else {
 					if ( $bytes == 0 || $percent == 0 ) {
-						$status_txt = __( 'Already Optimized', 'ps-medienoptimierung' );
+						$status_txt = __( 'Bereits optimiert', 'ps-medienoptimierung' );
 
 						if ( $show_resmush ) {
 							$status_txt .= '<br />' . $this->get_resmsuh_link( $id );
 						}
 
 					} elseif ( ! empty( $percent ) && ! empty( $bytes_readable ) ) {
-						$status_txt = $image_count > 1 ? sprintf( __( "%d images reduced ", 'ps-medienoptimierung' ), $image_count ) : __( "Reduced ", 'ps-medienoptimierung' );
+						$status_txt = $image_count > 1 ? sprintf( __( "%d Bilder reduziert ", 'ps-medienoptimierung' ), $image_count ) : __( "Reduziert ", 'ps-medienoptimierung' );
 
 						$stats_percent = number_format_i18n( $percent, 2, '.', '' );
 						$stats_percent = $stats_percent > 0 ? sprintf( "(  %01.1f%% )", $stats_percent ) : '';
-						$status_txt .= sprintf( __( "by %s %s", 'ps-medienoptimierung' ), $bytes_readable, $stats_percent );
+						$status_txt .= sprintf( __( "um %s %s", 'ps-medienoptimierung' ), $bytes_readable, $stats_percent );
 
 						$file_path = get_attached_file( $id );
 						$size      = file_exists( $file_path ) ? filesize( $file_path ) : 0;
@@ -1051,7 +1048,7 @@ if ( ! class_exists( 'WpSmush' ) ) {
 							}
 
 							//Detailed Stats Link
-							$status_txt .= sprintf( '<a href="#" class="ps-smush-action smush-stats-details ps-smush-title" tooltip="%s">%s [<span class="stats-toggle">+</span>]</a>', esc_html__( "Detailed stats for all the image sizes", "ps-medienoptimierung" ), esc_html__( "Smush stats", 'ps-medienoptimierung' ) );
+							$status_txt .= sprintf( '<a href="#" class="ps-smush-action smush-stats-details ps-smush-title" tooltip="%s">%s [<span class="stats-toggle">+</span>]</a>', esc_html__( "Detaillierte Statistiken für alle Bildgrößen", "ps-medienoptimierung" ), esc_html__( "Optimierungs-Statistiken", 'ps-medienoptimierung' ) );
 
 							//Stats
 							$stats = $this->get_detailed_stats( $id, $ps_smush_data, $attachment_data );
@@ -1076,13 +1073,13 @@ if ( ! class_exists( 'WpSmush' ) ) {
 				//If we are displaying the resmush option already, no need to show the Super Smush button
 				if ( ! $show_resmush && $this->validate_install() && ! $is_lossy && $this->lossy_enabled && $image_type != 'image/gif' ) {
 					// the button text
-					$button_txt  = __( 'Super-Smush', 'ps-medienoptimierung' );
+					$button_txt  = __( 'Super-Optimierung', 'ps-medienoptimierung' );
 					$show_button = true;
 				}
 
 			} elseif ( get_transient( 'smush-in-progress-' . $id ) ) {
 				// the status
-				$status_txt = __( 'Smushing in progress..', 'ps-medienoptimierung' );
+				$status_txt = __( 'Optimierung läuft..', 'ps-medienoptimierung' );
 
 				//Set PS Smush data to true in order to show the text
 				$ps_smush_data = true;
@@ -1095,13 +1092,13 @@ if ( ! class_exists( 'WpSmush' ) ) {
 			} else {
 
 				// the status
-				$status_txt = __( 'Not processed', 'ps-medienoptimierung' );
+				$status_txt = __( 'Noch nicht verarbeitet', 'ps-medienoptimierung' );
 
 				// we need to show the smush button
 				$show_button = true;
 
 				// the button text
-				$button_txt = __( 'Smush Now!', 'ps-medienoptimierung' );
+				$button_txt = __( 'Jetzt optimieren!', 'ps-medienoptimierung' );
 			}
 			if ( $text_only ) {
 				//For ajax response
@@ -1402,7 +1399,7 @@ if ( ! class_exists( 'WpSmush' ) ) {
 		}
 
 		/**
-		 * Skip messages respective to their ids
+		 * Überspringen messages respective to their ids
 		 *
 		 * @param $msg_id
 		 *
@@ -1410,12 +1407,12 @@ if ( ! class_exists( 'WpSmush' ) ) {
 		 */
 		function skip_reason( $msg_id ) {
 			$count           = count( get_intermediate_image_sizes() );
-			$smush_orgnl_txt = sprintf( esc_html__( "When you upload an image to WordPress it automatically creates %s thumbnail sizes that are commonly used in your pages. WordPress also stores the original full-size image, but because these are not usually embedded on your site we don’t Smush them. Pro users can override this.", 'ps_smushit' ), $count );
+			$smush_orgnl_txt = sprintf( esc_html__( "Beim Hochladen eines Bildes erstellt WordPress automatisch %s Thumbnail-Größen, die auf deinen Seiten genutzt werden. WordPress speichert auch das Originalbild in voller Größe, aber da es normalerweise nicht eingebettet ist, wird es nicht optimiert. Diese Einstellung lässt sich ändern.", 'ps-medienoptimierung' ), $count );
 			$skip_msg        = array(
 				'large_size' => $smush_orgnl_txt,
-				'size_limit' => esc_html__( "Image couldn't be smushed as it exceeded the 1Mb size limit, Pro users can smush images with size up to 32Mb.", "ps-medienoptimierung" )
+				'size_limit' => esc_html__( "Das Bild konnte nicht optimiert werden, da es das 1 MB-Limit überschreitet. Mit der Pro-Version können Bilder bis zu 32 MB optimiert werden.", "ps-medienoptimierung" )
 			);
-			$skip_rsn        = ! empty( $skip_msg[ $msg_id ] ) ? esc_html__( " Skipped", 'ps-medienoptimierung', 'ps-medienoptimierung' ) : '';
+			$skip_rsn        = ! empty( $skip_msg[ $msg_id ] ) ? esc_html__( " Übersprungen", 'ps-medienoptimierung' ) : '';
 			$skip_rsn        = ! empty( $skip_rsn ) ? $skip_rsn . '<span tooltip="' . $skip_msg[ $msg_id ] . '"><i class="dashicons dashicons-editor-help"></i></span>' : '';
 
 			return $skip_rsn;
@@ -1437,8 +1434,8 @@ if ( ! class_exists( 'WpSmush' ) ) {
 				<table class="ps-smush-stats-holder">
 					<thead>
 						<tr>
-							<th><strong>' . esc_html__( 'Image size', 'ps-medienoptimierung' ) . '</strong></th>
-							<th><strong>' . esc_html__( 'Savings', 'ps-medienoptimierung' ) . '</strong></th>
+							<th><strong>' . esc_html__( 'Bildgröße', 'ps-medienoptimierung' ) . '</strong></th>
+							<th><strong>' . esc_html__( 'Einsparungen', 'ps-medienoptimierung' ) . '</strong></th>
 						</tr>
 					</thead>
 					<tbody>';
@@ -1686,7 +1683,7 @@ if ( ! class_exists( 'WpSmush' ) ) {
 
 			$ajax_nonce = wp_create_nonce( "ps-smush-restore-" . $image_id );
 
-			return sprintf( '<a href="#" tooltip="%s" data-id="%d" data-nonce="%s" class="%s">%s</a>', esc_html__( "Restore original image.", "ps-medienoptimierung" ), $image_id, $ajax_nonce, $class, esc_html__( "Restore image", "ps-medienoptimierung" ) );
+			return sprintf( '<a href="#" tooltip="%s" data-id="%d" data-nonce="%s" class="%s">%s</a>', esc_html__( "Originalbild wiederherstellen.", "ps-medienoptimierung" ), $image_id, $ajax_nonce, $class, esc_html__( "Bild wiederherstellen", "ps-medienoptimierung" ) );
 		}
 
 		/**
@@ -1734,7 +1731,7 @@ if ( ! class_exists( 'WpSmush' ) ) {
 
 			$ajax_nonce = wp_create_nonce( "ps-smush-resmush-" . $image_id );
 
-			return sprintf( '<a href="#" tooltip="%s" data-id="%d" data-nonce="%s" class="%s">%s</a>', esc_html__( "Smush image including original file.", "ps-medienoptimierung" ), $image_id, $ajax_nonce, $class, esc_html__( "Resmush image", "ps-medienoptimierung" ) );
+			return sprintf( '<a href="#" tooltip="%s" data-id="%d" data-nonce="%s" class="%s">%s</a>', esc_html__( "Bild inkl. Originaldatei optimieren.", "ps-medienoptimierung" ), $image_id, $ajax_nonce, $class, esc_html__( "Bild neu optimieren", "ps-medienoptimierung" ) );
 		}
 
 		/**
@@ -1988,7 +1985,7 @@ if ( ! class_exists( 'WpSmush' ) ) {
 				return true;
 			}
 
-			//Skip if bulk activation, Or if we have to skip redirection
+			//Überspringen if bulk activation, Or if we have to skip redirection
 			if ( isset( $_GET['activate-multi'] ) || get_site_option( 'ps-smush-skip-redirect' ) ) {
 				return false;
 			}
@@ -2123,12 +2120,12 @@ if ( ! class_exists( 'WpSmush' ) ) {
 		}
 
 		/**
-		 * Combine Savings from PNG to JPG conversion with smush stats
+		 * Combine Einsparungen from PNG to JPG conversion with smush stats
 		 *
-		 * @param $stats Savings from Smushing the image
-		 * @param $conversion_savings Savings from converting the PNG to JPG
+		 * @param $stats Einsparungen from Smushing the image
+		 * @param $conversion_savings Einsparungen from converting the PNG to JPG
 		 *
-		 * @return Object Total Savings
+		 * @return Object Total Einsparungen
 		 */
 		function combine_conversion_stats( $stats, $conversion_savings ) {
 			if ( empty( $stats ) || empty( $conversion_savings ) ) {
@@ -2368,7 +2365,7 @@ if ( ! class_exists( 'WpSmush' ) ) {
 				//Setup stats, if not set already
 				$wpsmushit_admin->setup_global_stats();
 			}
-			// Total, Smushed, Unsmushed, Savings
+			// Total, Smushed, Unsmushed, Einsparungen
 			$stats['count_total']   = $wpsmushit_admin->total_count;
 			$stats['count_smushed'] = $wpsmushit_admin->smushed_count;
 			//Considering the images to be resmushed
