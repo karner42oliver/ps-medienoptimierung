@@ -200,14 +200,14 @@ if ( ! class_exists( 'WpSmushBulkUi' ) ) {
                             <div class="ps-smush-smush-stats-wrapper">
                                 <span class="ps-smush-total-optimised"><?php echo $wpsmushit_admin->smushed_count; ?></span>
                             </div>
-                            <span class="total-stats-label"><?php esc_html_e( "Attachments smushed", "ps-medienoptimierung" ); ?></span>
+                            <span class="total-stats-label"><?php esc_html_e( "Anhänge optimiert", "ps-medienoptimierung" ); ?></span>
                         </div>
                         <!-- Resized Image count -->
                         <div class="ps-smush-count-resize-total">
                             <div class="ps-smush-smush-stats-wrapper">
                                 <span class="ps-smush-total-optimised"><?php echo $resize_count; ?></span>
                             </div>
-                            <span class="total-stats-label"><?php esc_html_e( "Images resized", "ps-medienoptimierung" ); ?></span>
+                            <span class="total-stats-label"><?php esc_html_e( "Bilder verkleinert", "ps-medienoptimierung" ); ?></span>
                         </div>
                     </div>
 
@@ -231,7 +231,7 @@ if ( ! class_exists( 'WpSmushBulkUi' ) ) {
 				$wpsmushit_admin->super_smushed = $wpsmush_db->super_smushed_count();?>
 				<hr />
 				<div class="row super-smush-attachments">
-				<span class="float-l ps-smush-stats-label"><strong><?php esc_html_e( "Super-smushed savings", "ps-medienoptimierung" ); ?></strong></span>
+				<span class="float-l ps-smush-stats-label"><strong><?php esc_html_e( "Super-gequetschte Einsparungen", "ps-medienoptimierung" ); ?></strong></span>
 				<span class="ps-smush-stats<?php echo $WpSmush->lossy_enabled ? ' float-r' : ' float-l ps-smush-lossy-disabled-wrap' ?>"><?php
 					if ( $WpSmush->lossy_enabled ) {
 						echo '<span class="smushed-savings">' . size_format( $compression_savings, 1 ) . '</span>';
@@ -257,7 +257,7 @@ if ( ! class_exists( 'WpSmushBulkUi' ) ) {
 			    }
 			  ?>
 			<div class="row smush-resize-savings">
-				<span class="float-l ps-smush-stats-label"><strong><?php esc_html_e( "Resize savings", "ps-medienoptimierung" ); ?></strong></span>
+				<span class="float-l ps-smush-stats-label"><strong><?php esc_html_e( "Einsparungen durch Größenänderung", "ps-medienoptimierung" ); ?></strong></span>
 				<span class="ps-smush-stats<?php echo $class; ?>"><?php
 					if( !empty( $wpsmushit_admin->stats['resize_savings'] ) && $wpsmushit_admin->stats['resize_savings'] > 0 ) {
 						echo size_format( $wpsmushit_admin->stats['resize_savings'], 1 );
@@ -511,7 +511,7 @@ if ( ! class_exists( 'WpSmushBulkUi' ) ) {
 	                                if( 'original' != $name && 'resize' != $name ) {
 	                                    echo $wpsmushit_admin->settings[ $name ]['desc'];
 	                                }else{
-	                                    esc_html_e("Save a ton of space by not storing over-sized images on your server.", "ps-medienoptimierung");
+	                                    esc_html_e("Spare jede Menge Speicherplatz, indem Du keine übergroßen Bilder auf Deinem Server speicherst.", "ps-medienoptimierung");
 	                                }?>
 	                            </small>
 	                        </label>
@@ -658,7 +658,7 @@ if ( ! class_exists( 'WpSmushBulkUi' ) ) {
                          }
                          ?>
                         </ol>
-                        <span class="dismiss-recommendation"><i class="icon-fi-cross-close"></i><?php esc_html_e("DISMISS", "ps-medienoptimierung"); ?></span>
+                        <span class="dismiss-recommendation"><i class="icon-fi-cross-close"></i><?php esc_html_e("VERWERFEN", "ps-medienoptimierung"); ?></span>
                     </div><?php
 				} ?>
 				<div class="ps-smush-bulk-wrapper <?php echo $all_done ? ' hidden' : ''; ?>"><?php

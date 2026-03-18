@@ -88,9 +88,9 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 			}?>
             <!-- Einsparungen from Directory Smush -->
             <div class="row smush-dir-savings">
-            <span class="float-l ps-smush-stats-label"><strong><?php esc_html_e( "Directory-smush savings", "ps-medienoptimierung" ); ?></strong></span>
+            <span class="float-l ps-smush-stats-label"><strong><?php esc_html_e( "Einsparungen durch Ordner-Optimierung", "ps-medienoptimierung" ); ?></strong></span>
             <span class="ps-smush-stats<?php echo $human > 0 ? ' float-r' : ' float-l'?>">
-	            <span class="spinner" style="visibility: visible" title="<?php esc_html_e( "Updating Stats", "ps-medienoptimierung" ); ?>"></span>
+	            <span class="spinner" style="visibility: visible" title="<?php esc_html_e( "Statistiken werden aktualisiert", "ps-medienoptimierung" ); ?>"></span>
 				<?php
 				if ( $human < 0 ) { ?>
                     <span class="ps-smush-stats-human"> <?php echo size_format( $human,1 ); ?></span><?php
@@ -100,9 +100,9 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
                         <span class="ps-smush-stats-percent"><?php echo ! empty( $percent ) ? $percent : ''; ?>%</span><?php
 					}
 				} else { ?>
-                    <span class="ps-smush-stats-human settings-desc"><?php esc_html_e( "Smush images that aren't located in your uploads folder.", "ps-medienoptimierung" ); ?>
+                    <span class="ps-smush-stats-human settings-desc"><?php esc_html_e( "Bilder optimieren, die sich nicht im Upload-Ordner befinden.", "ps-medienoptimierung" ); ?>
                         <a href="#ps-smush-dir-browser" class="ps-smush-dir-link"
-                           title="<?php esc_html_e( "Select a directory you'd like to Smush.", "ps-medienoptimierung" ); ?>"><?php esc_html_e( "Choose directory", "ps-medienoptimierung" ); ?></a>
+                           title="<?php esc_html_e( "Wähle einen Ordner, den du optimieren möchtest.", "ps-medienoptimierung" ); ?>"><?php esc_html_e( "Ordner auswählen", "ps-medienoptimierung" ); ?></a>
 	                </span>
                     <span class="ps-smush-stats-sep hidden">/</span>
                     <span class="ps-smush-stats-percent"></span>
@@ -216,7 +216,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
 				return null;
 			}
 			//Print the button ?>
-            <button class="ps-smush-resume ps-smush-button button"><?php esc_html_e( "RESUME LAST SCAN", "ps-medienoptimierung" ); ?></button><?php
+            <button class="ps-smush-resume ps-smush-button button"><?php esc_html_e( "LETZTEN SCAN FORTSETZEN", "ps-medienoptimierung" ); ?></button><?php
 		}
 
 		/**
@@ -252,7 +252,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
             <div class="row">
                 <div class="ps-smush-dir-desc roboto-regular">
                     <!-- Description -->
-					<?php esc_html_e( "In addition to smushing your media uploads, you may want to also smush images living outside your uploads directory. Simply add any directories you wish to smush and bulk smush away!", "ps-medienoptimierung" ); ?>
+					<?php esc_html_e( "Zusätzlich zu deinen Medien-Uploads kannst du auch Bilder außerhalb deines Upload-Ordners optimieren. Füge einfach die gewünschten Ordner hinzu und starte die Massenoptimierung!", "ps-medienoptimierung" ); ?>
                 </div>
                 <!-- Directory Path -->
                 <input type="hidden" class="ps-smush-dir-path" value=""/>
@@ -265,7 +265,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
                     </div>
                     <!-- Notices -->
                     <div class="ps-smush-notice ps-smush-dir-all-done hidden">
-                        <i class="icon-fi-check-tick"></i><?php esc_html_e( "All images for the selected directory are smushed and up to date. Awesome!", "ps-medienoptimierung" ); ?>
+                        <i class="icon-fi-check-tick"></i><?php esc_html_e( "Alle Bilder im ausgewählten Ordner sind optimiert und aktuell. Super!", "ps-medienoptimierung" ); ?>
                     </div>
                     <div class="ps-smush-notice ps-smush-dir-remaining hidden">
                         <i class="icon-fi-warning-alert"></i><?php printf( esc_html__( "%s/%s Bild(er) erfolgreich optimiert, jedoch konnte(n) %s Bild(er) wegen eines Fehlers nicht optimiert werden.", "ps-medienoptimierung" ), '<span class="ps-smush-dir-smushed"></span>', '<span class="ps-smush-dir-total"></span>', '<span class="ps-smush-dir-remaining"></span>' ); ?>
@@ -277,8 +277,8 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
                         <!-- @todo: Check status of the images in last scan and do not show smush now button, if already finished -->
                         <button class="ps-smush-start"><?php esc_html_e( "BULK-OPTIMIERUNG", "ps-medienoptimierung" ); ?></button>
                         <button type="button"
-                                title="<?php esc_html_e( "Click to stop the directory smushing process.", "ps-medienoptimierung" ); ?>"
-                                class="button button-grey ps-smush-pause disabled"><?php esc_html_e( "CANCEL", "ps-medienoptimierung" ); ?></button>
+                                title="<?php esc_html_e( "Ordner-Optimierung stoppen.", "ps-medienoptimierung" ); ?>"
+                                class="button button-grey ps-smush-pause disabled"><?php esc_html_e( "ABBRECHEN", "ps-medienoptimierung" ); ?></button>
                         <span class="spinner"></span>
                     </div><?php
 					//Nonce Field
@@ -286,7 +286,7 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
                     <input type="hidden" name="ps-smush-continue-ajax" value=1>
                 </div>
                 <div class="dir-smush-button-wrap">
-                    <button class="ps-smush-browse ps-smush-button button"><?php esc_html_e( "CHOOSE DIRECTORY", "ps-medienoptimierung" ); ?></button><?php
+                    <button class="ps-smush-browse ps-smush-button button"><?php esc_html_e( "ORDNER WÄHLEN", "ps-medienoptimierung" ); ?></button><?php
 					//Optionally show a resume button, if there were images left from last scan
 					$this->show_resume_button(); ?>
                     <span class="spinner"></span>
@@ -1338,18 +1338,18 @@ if ( ! class_exists( 'WpSmushDir' ) ) {
                 <div class="back"></div>
                 <div class="box-scroll">
                     <div class="box">
-                        <div class="title"><h3><?php esc_html_e( "Directory list", "ps-medienoptimierung" ); ?></h3>
+                        <div class="title"><h3><?php esc_html_e( "Ordnerliste", "ps-medienoptimierung" ); ?></h3>
                             <div aria-hidden="true" class="close">&times;</div>
-                            <button class="wpdui-sr-only"><span class="wpdui-sr-only">Close</span></button>
+                            <button class="wpdui-sr-only"><span class="wpdui-sr-only">Schließen</span></button>
                         </div>
-                        <div class="ps-smush-instruct"><?php esc_html_e( "Choose the folder you wish to smush.", "ps-medienoptimierung" ); ?></div>
+                        <div class="ps-smush-instruct"><?php esc_html_e( "Wähle den Ordner, den du optimieren möchtest.", "ps-medienoptimierung" ); ?></div>
                         <div class="content">
                         </div>
                         <div class="ps-smush-select-button-wrap">
-                            <div class="ps-smush-section-desc"><?php esc_html_e( "Smush will also include any images in sub folders of your selected folder.", "ps-medienoptimierung" ); ?></div>
+                            <div class="ps-smush-section-desc"><?php esc_html_e( "Auch Bilder in Unterordnern des gewählten Ordners werden optimiert.", "ps-medienoptimierung" ); ?></div>
                             <div class="ps-smush-select-button-wrap-child">
                                 <span class="spinner"></span>
-                                <button class="ps-smush-select-dir"><?php esc_html_e( "ADD DIRECTORY", "ps-medienoptimierung" ); ?></button>
+                                <button class="ps-smush-select-dir"><?php esc_html_e( "ORDNER HINZUFÜGEN", "ps-medienoptimierung" ); ?></button>
                             </div>
                         </div>
                     </div>
